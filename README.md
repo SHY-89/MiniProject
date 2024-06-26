@@ -40,5 +40,12 @@ API
 
 
 설치 방법
+
 git clone https://github.com/SHY-89/MiniProject.git .
+
 pip install -r requirements.txt
+
+
+데모사이트
+
+http://spartaaisyh.pythonanywhere.com/
