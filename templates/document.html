@@ -115,6 +115,8 @@
             alert('구현3 필요!!')
         }
     </script>
+    <!-- 명언 -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 </head>
 
 <body>
@@ -187,13 +189,34 @@
         <section class="py-5 text-center container">
             <div class="row py-lg-5">
                 <div class="col-lg-6 col-md-8 mx-auto">
-                    <h1 class="fw-light">1조 S.C.V 소개</h1>
-                    <p class="lead text-body-secondary">Something short and leading about the collection below—its
-                        contents, the creator, etc. Make it short and sweet, but not too short so folks don’t simply
-                        skip over it entirely.</p>
+                    <h2 class="fw-light">
+                        <p id="quoteContent"> </p>
+                    </h2>
+                    <h3 class="lead text-body-secondary">
+                        <p id="quoteAuthor"> </p>
+                    </h3>
 
                 </div>
             </div>
+                        <!-- 명언 -->
+            <script>
+                $(document).ready(function renderQuote() {
+                    let url = `https://api.quotable.io/random`;
+                    fetch(url)
+                        .then((res) => res.json())
+                        .then((data) => {
+                            // console.log(data)
+                            let author = data["author"]
+                            let content = data["content"];
+
+                            let author2 = `- ${author} -`
+                            let content2 = ` ${content} `
+
+                            $("#quoteAuthor").text(author2);
+                            $("#quoteContent").text(content2);
+                        });
+                })
+            </script>
         </section>
 
         <!-- 상세 내용 -->
