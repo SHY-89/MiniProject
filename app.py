@@ -59,6 +59,20 @@ def user_create():
     user_list = Users.query.all()  ## user_list에 Users DB에 있는 모든 정보를 저장
     return redirect(url_for('index',user=user_list))  # index에 user_list 정보를 전달
 
+@app.route("/user/del/<int:id>", methods=['GET'])
+def user_del(id):
+    try:
+        del_user = Users.query.get_or_404(id) ## id를 조회
+        db.session.delete(del_user)
+        db.session.commit()
+    except Exception as e:  ## id가 없으면
+        db.session.rollback() ## 변경사항 롤백
+        app.logger.error(f"An error occurred: {str(e)}")  ##에러를 로그에 기록
+        return "An error occurred", 500  ## 사용자에게 500 서버 오류 반환
+    finally:  ## 예외처리와 관계없이
+        db.session.close() ##데이터베이스 세션 close
+    
+    return redirect(url_for('index'))
 
 @app.route('/document/<int:id>')
 def document(id):
@@ -98,4 +112,4 @@ def user_edit(id):
 
 
 if __name__ == '__main__':
-    app.run()
+    app.run(debug=True)
