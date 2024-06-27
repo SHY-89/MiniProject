@@ -35,7 +35,7 @@ API
   - 메인          /
   - 멤버 추가     /user/create/          Get
   - 멤버 상세     /document/<ind:id>     Get
-  - 멤버 수정     /update/<int:user_id>  Post
+  - 멤버 수정     /user/edit/<int:id>    Post
   - 멤버 삭제     /user/del/<int:id>     Get
 
 
